@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_10_150739) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_10_180913) do
   create_table "passwords", force: :cascade do |t|
     t.boolean "active"
     t.datetime "active_end"
@@ -20,6 +20,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_10_150739) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_passwords_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -33,4 +42,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_10_150739) do
   end
 
   add_foreign_key "passwords", "users", on_delete: :cascade
+  add_foreign_key "roles", "users", on_delete: :cascade
 end

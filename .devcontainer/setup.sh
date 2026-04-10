@@ -37,3 +37,7 @@ sudo apt update
 sudo apt install sqlite3 -y
 
 sqlite3 "$DB_PATH" "PRAGMA journal_mode=DELETE;"
+
+cd PROJECT_PATH
+bin/rails db:migrate
+bin/rails db:seed
