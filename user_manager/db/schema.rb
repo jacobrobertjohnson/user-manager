@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_09_204801) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_10_150739) do
   create_table "passwords", force: :cascade do |t|
     t.boolean "active"
     t.datetime "active_end"
     t.datetime "active_start"
     t.datetime "created_at", null: false
-    t.string "password_hash"
+    t.string "password_digest"
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_passwords_on_user_id"
   end
+
+  create_table "users", force: :cascade do |t|
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.string "email_address"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "updated_at", null: false
+    t.string "username"
+  end
+
+  add_foreign_key "passwords", "users", on_delete: :cascade
 end
